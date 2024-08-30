@@ -4,9 +4,16 @@ from openai import OpenAI  # 导入OpenAI库用于访问GPT模型
 from logger import LOG  # 导入日志模块
 
 class LLM:
-    def __init__(self):
+    def __init__(self,api_key):
         # 创建一个OpenAI客户端实例
-        self.client = OpenAI()
+        self.api_key = api_key
+        print("api_key================================"+api_key)
+        self.client = OpenAI(
+            #302.AI后台-API超市-API列表 生成的API KEY
+            api_key=self.api_key,
+            #302.AI的base-url
+            base_url="https://api.302.ai/v1"
+        )
         # 从TXT文件加载提示信息
         with open("prompts/report_prompt.txt", "r", encoding='utf-8') as file:
             self.system_prompt = file.read()

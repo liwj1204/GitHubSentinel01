@@ -25,3 +25,9 @@ class SubscriptionManager:
         if repo in self.subscriptions:
             self.subscriptions.remove(repo)
             self.save_subscriptions()
+    def update_subscription(self, old_repo, new_repo):
+        # 更新订阅列表中的项目
+        if old_repo in self.subscriptions and new_repo not in self.subscriptions:
+            index = self.subscriptions.index(old_repo)
+            self.subscriptions[index] = new_repo
+            self.save_subscriptions()
